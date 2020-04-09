@@ -1,11 +1,11 @@
 create table if not exists Ingredient (
-	id varchar(4) not null,
+	id varchar(4) not null PRIMARY KEY,
 	name varchar(25) not null,
 	type varchar(10) not null
 );
 
 create table if not exists Taco (
-	id identity,
+	id bigint AUTO_INCREMENT PRIMARY KEY,
 	name varchar(50) not null,
 	createdAt timestamp not null
 );
@@ -22,7 +22,7 @@ alter table Taco_Ingredients
 	add foreign key (ingredient) references Ingredient(id);
 
 create table if not exists Taco_Order (
-	id identity,
+	id bigint AUTO_INCREMENT PRIMARY KEY,
 	name varchar(50) not null,
 	street varchar(50) not null,
 	city varchar(50) not null,
