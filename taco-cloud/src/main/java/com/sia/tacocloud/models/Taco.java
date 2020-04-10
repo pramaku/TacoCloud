@@ -3,7 +3,7 @@ package com.sia.tacocloud.models;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +22,10 @@ import javax.validation.constraints.Size;
 public class Taco
 {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(name="created_at", nullable=false, updatable=false)
     private Date createdAt;
 
     @NotNull
@@ -42,14 +44,15 @@ public class Taco
     public Taco()
     {
         super();
-        // TODO Auto-generated constructor stub
     }
+
     public Taco(String name, List<Ingredient> ingredients)
     {
         super();
         this.name = name;
         this.ingredients = ingredients;
     }
+
     public Taco(
             Long id,
             Date creaedAt,
@@ -62,22 +65,27 @@ public class Taco
         this.name = name;
         this.ingredients = ingredients;
     }
+    
     public String getName()
     {
         return name;
     }
+    
     public void setName(String name)
     {
         this.name = name;
     }
+    
     public List<Ingredient> getIngredients()
     {
         return ingredients;
     }
+    
     public void setIngredients(List<Ingredient> ingredients)
     {
         this.ingredients = ingredients;
     }
+    
     @Override
     public int hashCode()
     {
@@ -89,6 +97,7 @@ public class Taco
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
+    
     @Override
     public boolean equals(Object obj)
     {
@@ -135,10 +144,12 @@ public class Taco
     {
         return "Taco [id=" + id + ", creaedAt=" + createdAt + ", name=" + name + ", ingredients=" + ingredients + "]";
     }
+    
     public Long getId()
     {
         return id;
     }
+    
     public void setId(Long id)
     {
         this.id = id;
@@ -154,6 +165,7 @@ public class Taco
     {
         return createdAt;
     }
+
     public void setCreaedAt(Date creaedAt)
     {
         this.createdAt = creaedAt;
