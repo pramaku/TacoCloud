@@ -16,6 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.sia.tacocloud.data.jpa.OrderRepository;
 import com.sia.tacocloud.models.Order;
+import com.sia.tacocloud.props.OrderProps;
 
 @Controller
 @RequestMapping("/orders")
@@ -25,7 +26,8 @@ public class OrderController
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
     private OrderRepository orderRepo;
-
+    @Autowired
+    private OrderProps props;
     @Autowired
     public OrderController(OrderRepository orderRepo)
     {
@@ -36,6 +38,7 @@ public class OrderController
     @GetMapping("/current")
     public String orderForm(@ModelAttribute Order order)
     {
+    	log.info("Page size property: {}", props.getPagesize());
         return "orderForm";
     }
 
