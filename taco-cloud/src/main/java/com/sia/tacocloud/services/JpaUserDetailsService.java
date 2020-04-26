@@ -28,7 +28,6 @@ public class JpaUserDetailsService implements UserDetailsService
 		else
 		{
 			throw new UsernameNotFoundException("User " + username + " doesnot exist");
-			
 		}
 	}
 }

@@ -1,19 +1,19 @@
 package com.sia.tacocloud;
 
-import java.util.Arrays;
-import java.util.List;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import com.sia.tacocloud.data.jpa.IngredientRepository;
-import com.sia.tacocloud.models.Ingredient;
-import com.sia.tacocloud.models.Ingredient.Type;;
+import com.sia.tacocloud.data.jpa.IngredientRepository;;
 
 @Component
+@Profile("web")
 public class AppStartupRunner implements ApplicationRunner {
+	Logger log = LoggerFactory.getLogger(AppStartupRunner.class);
 	@Autowired
 	IngredientRepository ingredientRepo;
 
@@ -33,6 +33,7 @@ public class AppStartupRunner implements ApplicationRunner {
 				new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 
 		ingredientRepo.saveAll(ingredients);*/
+		log.info("App starter :: run");
 	}
 
 }

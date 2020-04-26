@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.sia.tacocloud.props.OrderProps;
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("order")
+@Profile("web")
 public class OrderController
 {
     private static final Logger log = LoggerFactory.getLogger(OrderController.class);

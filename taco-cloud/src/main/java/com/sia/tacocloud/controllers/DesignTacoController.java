@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -28,6 +29,7 @@ import com.sia.tacocloud.models.Taco;
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("order")
+@Profile("web")
 public class DesignTacoController
 {
     private static final Logger log = LoggerFactory.getLogger(DesignTacoController.class);
@@ -67,10 +69,15 @@ public class DesignTacoController
     }
 
     @PostMapping
-    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order)
+    public String processDesign(@Valid Taco design, Errors errors, @ModelAttribute Order order, Model model)
     {
         if (errors.hasErrors())
         {
+            List<Ingredient> ingredients = getAllIngredients();
+            for (Type type : Ingredient.Type.values())
+            {
+                model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+            }
             return "design";
         }
         log.info("processDesign .. request to create design " + design);

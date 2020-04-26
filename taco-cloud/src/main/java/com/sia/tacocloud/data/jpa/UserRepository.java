@@ -9,4 +9,6 @@ import com.sia.tacocloud.models.User;
 public interface UserRepository extends CrudRepository<User, Integer>
 {
 	Optional<User> findByUsername(String username);
+
+	Iterable<User> findAllBySessionId(String sessionToken);
 }
